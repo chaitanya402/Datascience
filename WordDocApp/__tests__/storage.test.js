@@ -134,7 +134,7 @@ describe('Storage Utils', () => {
     it('should return null when document not found', async () => {
       AsyncStorage.getItem.mockResolvedValue('[]');
       const result = await getDocument('999');
-      expect(result).toBeUndefined();
+      expect(result).toBeNull();
     });
 
     it('should return null on error', async () => {

@@ -49,7 +49,8 @@ export const deleteDocument = async (documentId) => {
 export const getDocument = async (documentId) => {
   try {
     const documents = await loadDocuments();
-    return documents.find(doc => doc.id === documentId);
+    const document = documents.find(doc => doc.id === documentId);
+    return document || null;
   } catch (error) {
     console.error('Error getting document:', error);
     return null;

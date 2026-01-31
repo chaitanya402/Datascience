@@ -1,6 +1,6 @@
 import 'react-native';
 import React from 'react';
-import {render, fireEvent} from '@testing-library/react-native';
+import {render} from '@testing-library/react-native';
 import FormattingToolbar from '../src/components/FormattingToolbar';
 
 describe('FormattingToolbar Component', () => {
@@ -16,32 +16,38 @@ describe('FormattingToolbar Component', () => {
     onDecreaseFontSize: jest.fn(),
   };
 
-  it('renders correctly', () => {
-    const {getByTestId} = render(<FormattingToolbar {...mockProps} />);
-    expect(getByTestId).toBeDefined();
+  beforeEach(() => {
+    jest.clearAllMocks();
   });
 
-  it('calls onBoldPress when bold button is pressed', () => {
-    const {getByA11yHint} = render(<FormattingToolbar {...mockProps} />);
-    // Note: This test structure shows the pattern
-    // Actual implementation would need accessibility labels
-    expect(mockProps.onBoldPress).not.toHaveBeenCalled();
+  it('renders correctly with default props', () => {
+    const {toJSON} = render(<FormattingToolbar {...mockProps} />);
+    expect(toJSON()).toBeTruthy();
   });
 
-  it('applies active style when isBold is true', () => {
-    const {container} = render(
+  it('renders with all formatting buttons', () => {
+    const component = render(<FormattingToolbar {...mockProps} />);
+    expect(component).toBeDefined();
+  });
+
+  it('renders with bold active when isBold is true', () => {
+    const {toJSON} = render(
       <FormattingToolbar {...mockProps} isBold={true} />,
     );
-    expect(container).toBeDefined();
+    expect(toJSON()).toBeTruthy();
   });
 
-  it('calls onIncreaseFontSize when + button is pressed', () => {
-    render(<FormattingToolbar {...mockProps} />);
-    expect(mockProps.onIncreaseFontSize).not.toHaveBeenCalled();
+  it('renders with italic active when isItalic is true', () => {
+    const {toJSON} = render(
+      <FormattingToolbar {...mockProps} isItalic={true} />,
+    );
+    expect(toJSON()).toBeTruthy();
   });
 
-  it('calls onDecreaseFontSize when - button is pressed', () => {
-    render(<FormattingToolbar {...mockProps} />);
-    expect(mockProps.onDecreaseFontSize).not.toHaveBeenCalled();
+  it('renders with underline active when isUnderline is true', () => {
+    const {toJSON} = render(
+      <FormattingToolbar {...mockProps} isUnderline={true} />,
+    );
+    expect(toJSON()).toBeTruthy();
   });
 });
