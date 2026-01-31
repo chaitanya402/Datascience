@@ -339,13 +339,15 @@ def create_stars_document():
 
 def main():
     """Main function to generate and save the document."""
+    import os
+    
     print("Generating Word document about stars...")
     
     # Create the document
     doc = create_stars_document()
     
-    # Save the document
-    output_file = '/home/runner/work/Datascience/Datascience/Stars.docx'
+    # Save the document in the current directory
+    output_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Stars.docx')
     doc.save(output_file)
     
     print(f"Document successfully created: {output_file}")
